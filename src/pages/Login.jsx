@@ -1,12 +1,21 @@
-import React from 'react'
+import React, {useState} from 'react';
 
-import '../assets/css/auth.css';
+import auth from '../config/firebase';
+import { signInWithEmailAndPassword } from '@firebase/auth';
 
 import AuthImage from '../components/AuthImg';
 import AuthButton from '../components/AuthButton';
 import GoogleAuth from '../components/GoogleAuth';
 
 const Login = () => {
+    const [email, setEmail] = useState(""); 
+    const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const handleLogin = () => {
+        return signInWithEmailAndPassword(auth, email, password);
+    }
+
     return ( 
         <div className="bg-white relative lg:py-20 loginform">
             <div className="flex flex-col items-center justify-between pt-0 pr-10 pb-0 pl-10 mt-0 mr-auto mb-0 ml-auto max-w-7xl
@@ -23,8 +32,8 @@ const Login = () => {
                         <p className="w-full text-4xl font-medium text-center leading-snug font-serif">Welcome to Login</p>
                         <form className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
                             <div className="relative">
-                                <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">Username</p>
-                                <input placeholder="Enter username or email" type="email" className="border placeholder-gray-400 focus:outline-none
+                                <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">Email</p>
+                                <input placeholder="Enter email" type="email" name='email' className="border placeholder-gray-400 focus:outline-none
                                     focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
                                     border-gray-300 rounded-md" required/>
                             </div>

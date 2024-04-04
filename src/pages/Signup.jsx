@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
-import firebase from '../config/firebase';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import auth from "../config/firebase";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 import AuthImage from '../components/AuthImg';
 import AuthButton from '../components/AuthButton';
@@ -12,7 +12,6 @@ const SignUp = () => {
     const [email, setEmail] = useState(""); 
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    const auth = getAuth(); 
     
     const clearForm = () => { 
         setEmail(""); 
@@ -26,7 +25,8 @@ const SignUp = () => {
         if (name === "password") setPassword(value);
     };
 
-    const handleSubmit = async (e) => {
+    // handle email sign in flow
+    const handleEmailSignin = async (e) => {
         e.preventDefault();
         try {
             const userData = await createUserWithEmailAndPassword(
@@ -63,7 +63,7 @@ const SignUp = () => {
         }
         
         clearForm();
-    }
+    };
 
     return ( 
         <div className="bg-white relative lg:py-20">
@@ -80,7 +80,7 @@ const SignUp = () => {
                                 relative z-10">
                                 <p className="w-full text-4xl font-medium text-center leading-snug font-serif">Sign up</p>
                                 {/* Signup form section*/}
-                                <form className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8" onSubmit={handleSubmit}>
+                                <form className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8" onSubmit={handleEmailSignin}>
                                     {/* Username section*/}
                                     {/* <div className="relative">
                                         <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600

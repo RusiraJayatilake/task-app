@@ -7,6 +7,12 @@ const Tasks = () => {
             description: "Task Description 1",
             duedate: formatDate(new Date()),
             status: "Active"
+        },
+        {
+            title: "Task title 2",
+            description: "Task Description 2",
+            duedate: formatDate(new Date()),
+            status: "Inactive"
         }
     ];
 
